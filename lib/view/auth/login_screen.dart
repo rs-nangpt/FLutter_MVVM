@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mvvmflutter/data/response/api_response.dart';
 import 'package:mvvmflutter/data/response/login_response.dart';
-import 'package:mvvmflutter/data/utils/common_utils.dart';
+import 'package:mvvmflutter/utils/common_utils.dart';
 import 'package:mvvmflutter/view/auth/login_viewmodel.dart';
 import 'package:mvvmflutter/view/common/form_input_field.dart';
 import 'package:provider/provider.dart';
