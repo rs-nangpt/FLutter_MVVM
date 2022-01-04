@@ -42,7 +42,8 @@ class FormInputField extends StatelessWidget {
             label ?? '',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 14
+              fontSize: 14,
+              color: Colors.white
             ),
           ),
           const SizedBox(
@@ -58,7 +59,8 @@ class FormInputField extends StatelessWidget {
       label ?? '',
       style: TextStyle(
           fontWeight: FontWeight.bold,
-          fontSize: 14
+          fontSize: 14,
+          color: Colors.white
       ),
     );
   }
@@ -76,7 +78,7 @@ class _RequiredText extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(5)),
-        color: Colors.red,
+        color: Colors.lightBlue,
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(

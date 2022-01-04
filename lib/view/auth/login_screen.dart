@@ -17,6 +17,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _editEmailController = TextEditingController();
   final TextEditingController _editPasswordController = TextEditingController();
+  late LoginViewModel loginViewModel;
 
   @override
   void dispose() {
@@ -26,26 +27,44 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   @override
-  Future<void> didChangeDependencies() async {
-    LoginViewModel loginViewModel = Provider.of<LoginViewModel>(context);
+  void initState() {
+    _editEmailController.text = "eve.holt@reqres.in";
+    _editPasswordController.text = "cityslicka";
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    loginViewModel = Provider.of<LoginViewModel>(context);
     BaseResponse apiResponse = loginViewModel.vmBaseResponse;
     checkLoginStatusWidget(context, apiResponse, loginViewModel);
   }
 
   @override
   Widget build(BuildContext context) {
-    LoginViewModel loginViewModel = Provider.of<LoginViewModel>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Column(
-        children: [
-          loginForm(loginViewModel),
-          Visibility(
-              visible: loginViewModel.isShowLoading == true,
-              child: Center(child: CircularProgressIndicator()))
-        ],
+      body: Container(
+        width: 500,
+        height: 1000,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+          image: AssetImage("assets/bg_login.jpeg"),
+          fit: BoxFit.cover,
+        )),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              loginForm(loginViewModel),
+              Visibility(
+                  visible: loginViewModel.isShowLoading == true,
+                  child: Center(child: CircularProgressIndicator()))
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -81,35 +100,39 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget loginForm(LoginViewModel loginViewModel) {
     return Padding(
       padding: const EdgeInsets.only(right: 20.0, left: 20),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            FormInputField(
-              label: 'Email',
-              inputWidget: TextFormField(
-                controller: _editEmailController,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          FormInputField(
+            label: 'Email',
+            inputWidget: TextFormField(
+              controller: _editEmailController,
+              style: TextStyle(
+                color: Colors.white
               ),
-              requiredType: RequiredType.none,
             ),
-            FormInputField(
-              label: 'Password',
-              inputWidget: TextFormField(
-                controller: _editPasswordController,
+            requiredType: RequiredType.none,
+          ),
+          FormInputField(
+            label: 'Password',
+            inputWidget: TextFormField(
+              controller: _editPasswordController,
+              style: TextStyle(
+                  color: Colors.white
               ),
-              requiredType: RequiredType.none,
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  submitLogin(loginViewModel);
-                },
-                child: Text("Login"),
-              ),
-            )
-          ],
-        ),
+            requiredType: RequiredType.none,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                submitLogin(loginViewModel);
+              },
+              child: Text("Login"),
+            ),
+          )
+        ],
       ),
     );
   }

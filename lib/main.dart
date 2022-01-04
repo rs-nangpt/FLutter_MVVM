@@ -29,12 +29,12 @@ class MyApp extends StatelessWidget {
         title: 'MVVM FLUTTER DEMO',
         theme: ThemeData(
           appBarTheme: AppBarTheme(),
-          primarySwatch: Colors.purple,
-          accentColor: Colors.deepOrange,
+          primarySwatch: Colors.green,
+          accentColor: Colors.green,
         ),
         initialRoute: '/',
         routes: {
-          '/': (context) =>LoginScreen(title: ""),
+          '/': (context) =>LoginScreen(title: "MVVM FLUTTER DEMO"),
         },
       ),
     );
